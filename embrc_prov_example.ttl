@@ -1,0 +1,377 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ssn: <http://www.w3.org/ns/ssn/#> .
+@prefix sosa: <http://www.w3.org/ns/ssn/#> .
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+#### ACTIVITIES ####
+#TRANSPORTING#
+<http://example.org/transport/transportExample>
+    a prov:Activity, schema:Action ; 
+    dct:type "Transporting" ; 
+    
+    schema:description {short description of transport storage conditions} ; 
+    prov:atLocation [
+        a prov:Location, schema:Place ; 
+        schema:identifier {ID}; 
+        schema:address {address} ; 
+    ] ;
+    prov:startedAtTime {datetime} ; 
+    prov:endedAtTime {datetime} ; 
+    
+    prov:wasAssociatedWith <http://example.org/person/1> ;
+    
+    prov:used <http://example.org/Protocol/1> ; 
+       
+    prov:used <http://example.org/Permit/2> ; 
+.
+
+#PROCESSING#
+<http://example.org/processing/processingExample>
+    a prov:Activity, schema:Action ; 
+    dct:type "Processing" ; 
+    
+    schema:instrument {material & chemical objects that helped the agent perform the action} ; 
+    schema:object {ID of the thing on which the processing activity is performed} ;
+    schema:result {ID of the result output of this activity} ; 
+    prov:used <http://example.org/device/2> ; 
+    prov:atLocation <http://example.org/location-type2> ; 
+    
+    prov:startedAtTime {datetime} ; 
+    prov:endedAtTime {datetime} ; 
+
+    prov:wasAssociatedWith <http://example.org/person/2> ; 
+
+    prov:used <http://example.org/protocol/2> ; 
+.
+
+
+#STORING#
+<http://example.org/storage/storageExample>
+    a prov:Activity, schema:Action ; 
+    dct:type "Storing" ; 
+    
+    schema:additionalType {the type of storage} ; 
+    schema:description {description of the storage conditions} ; 
+
+    schema:object {ID of the thing that is used (~ stored) in this activity} ;
+    prov:used <http://example.org/StorageDevice/1> ;
+    
+    #Case of Bio-banking --> Agent associated with this activity is the bio-banking facility
+    schema:identifier <http://example.org/BiobankInstitute> ; 
+    
+    prov:atLocation <http://example.org/location-type1> ; 
+    
+    prov:startedAtTime {datetime} ; 
+    prov:endedAtTime {datetime} ; 
+    
+    prov:wasAssociatedWith <http://example.org/person/2> ;
+
+    prov:used <http://example.org/protocol/3> ;
+.
+
+#ACQUIRING#
+<http://example.org/acquisition/acquisitionExample>
+    a prov:Activity, schema:Action ; 
+    dct:type "Acquiring" ; 
+    
+    schema:object {ID of the thing that is acquired in this activity} ;
+    
+    prov:atLocation <http://example.org/location-type1> ; 
+    
+    prov:startedAtTime {datetime} ; 
+    prov:endedAtTime {datetime} ; 
+    
+    prov:wasAssociatedWith <http://example.org/person/4> ;
+
+    prov:used <http://example.org/protocol/4> ;
+.
+
+#SAMPLING#
+<http://example.org/Sampling/1>
+    a sosa:Sampling, prov:Activity, schema:Action;
+    dct:type "Sampling" ; 
+    
+    prov:used <http://example.org/device/sampler_a> ;
+     
+    prov:used <http://example.org/permit/1> ; 
+
+    prov:generated <http://example.org/sample1> ; 
+   
+    prov:atLocation <http://example.org/location-type1>,  <http://example.org/location-type2>, <http://example.org/location-type3> ; 
+    
+    prov:startedAtTime {datetime} ;
+    prov:endedAtTime {datetime} ;
+
+    prov:wasAssociatedWith <http://example.org/person/3> ; 
+
+    prov:used <http://example.org/samplingprotocol/1> ; 
+.
+
+
+#SOFTWARE PROCESSING#
+<http://example.org/softwareprocessingExample1>
+    a prov:Activity, schema:Action ; 
+    dct:type "Software Processing" ;
+    
+    schema:name {name of the software processing activity} ; 
+    schema:description {description of the software processing acitivity} ; 
+    schema:object {ID of the thing/data that is processed in this activity} ; 
+
+    prov:used <http://example.org/software/1> ;
+
+
+    prov:wasAssociatedWith <http://example.org/person/3> ; 
+    prov:used <http://example.org/protocol/softwareprotocol> ;
+.
+
+#DATA RETRIEVING#
+<http://example.org/DataRetrieval/1>
+    a prov:Activity, schema:Action ; 
+    dct:type "Data retrieving" ; 
+
+    schema:description {description of the data retrieval} ; 
+    schema:object {ID of the data that is retrieved} ; 
+    schema:target {the target EntryPoint, or url, for this Action} ; 
+
+    prov:wasAssociatedWith <http://example.org/person/3> ; 
+    prov:used <http://example.org/protocol/softwareprotocol> ;
+.
+    
+
+####LOCATION####
+<http://example.org/location-type1>
+    a prov:Location, schema:PostalAddress; 
+        
+    schema:addressCountry {} ; 
+    schema:postalCode {} ; 
+    schema:streetAddress {} ; 
+.
+
+<http://example.org/location-type2>
+    a prov:Location, schema:Place ;
+     
+    schema:name {ISO country name} ; 
+    schema:latitude {} ;
+    schema:longitude {} ; 
+    owl:sameAs {MRGID url} ;  
+.
+
+<http://example.org/location-type3>
+    a prov:Location, dct:Location ;  
+    
+    locn:geometry {geometry could be encoded as WKT (geosparql:asWKT)} ; 
+    dcat:bbox {} ; 
+    dcat:centroid {} ;     
+.
+
+
+####AGENT####
+<http://example.org/person/1>
+        a prov:Person, schema:Person ; 
+
+        schema:identifier {orcID} ; #Katrina will dig through homework to check how orcID is referenced 
+        schema:giveName {firstname} ;
+        schema:surName {surname} ; 
+        schema:email {mail} ; 
+        schema:knowsAbout {domains of expertise} ; 
+        prov:hadRole [
+            a prov:Role ; 
+            dct:type {role during activity} ;
+        ] ; 
+.
+
+<http://example.org/person/2> 
+        a prov:Person, schema:Person ; 
+
+        schema:identifier {orcID} ; 
+        schema:giveName {firstname} ;
+        schema:surName {surname} ; 
+        schema:email {mail} ; 
+        schema:knowsAbout {domains of expertise} ; 
+        prov:hadRole [
+            a prov:Role ; 
+            dct:type {role during Biobanking activity} ;
+        ] ; 
+        schema:affiliation <http://example.org/BiobankInstitute> ;
+.
+
+<http://example.org/person/3> 
+        a prov:Person, schema:Person ; 
+
+        schema:identifier {orcID} ; 
+        schema:giveName {firstname} ;
+        schema:surName {surname} ; 
+        schema:email {mail} ; 
+        schema:knowsAbout {domains of expertise} ; 
+        prov:hadRole [
+            a prov:Role ; 
+            dct:type {role during activity} ;
+        ] ; 
+        schema:affiliation {organization that person works for} ;
+.
+
+<http://example.org/person/4>
+        a prov:Person, schema:Person ; 
+
+        schema:identifier {orcID} ;
+        schema:giveName {firstname} ;
+        schema:surName {surname} ; 
+        schema:email {mail} ; 
+        prov:hadRole [
+            a prov:Role ; 
+            dct:type {role during activity} ;
+        ] ; 
+.
+<http://example.org/BiobankInstitute>
+     a prov:Agent, schema:Organization ;
+     
+     schema:identifier {ROR ID, ...} ; 
+     schema:name {institute name} ; 
+     schema:email {mail} ; 
+     schema:telephone {institute telephone number} ; 
+     schema:address {institute address} ; 
+.
+
+
+#### ENTITIES ####
+#PROTOCOL#
+<http://example.org/samplingprotocol/1> 
+     a prov:Entity, schema:CreativeWork, dwc:samplingProtocol ; #only specify the latter in case of a sampling activity - not mandatory
+     
+     schema:name {protocol of sampling 1} ; 
+     schema:description {this is the description of the procotol used during sampling-1} ; 
+     schema:identifier {url of the protocol - should be same as subject} ; 
+     
+     schema:url {url of location where protocol can be found} ; 
+     schema:accessibilitySummary {description of where/how the protocol can be found} ; 
+.
+
+<http://example.org/Protocol/1> 
+     a prov:Entity, schema:CreativeWork ; 
+     
+     schema:name {protocol 1} ; 
+     schema:description {this is the description of the procotol used during the transport activity ... } ; 
+     schema:identifier {url of the protocol - should be same as subject} ; 
+     
+     schema:url {url of location where protocol can be found} ; 
+     schema:accessibilitySummary {description of where/how the protocol can be found} ; 
+.
+
+
+#DEVICE#
+<http://example.org/Instrument/1>
+    a prov:Entity, sosa:Sampler ;   
+
+    schema:identifier {ID of the device/instrument} ; 
+    dct:type {type of instrument} ; 
+    dct:title {name of the instrument} ; 
+    
+    sosa:isHostedBy <http://example.org/Platform/A> ;
+    prov:wasInfluencedBy <http://example.org/software/1> ; 
+.
+
+<http://example.org/StorageDevice/1>
+    a prov:Entity ; 
+    dct:type {type of instrument} ; 
+    dct:title {name of the instrument} ; 
+    schema:description {the description/listing of the configuration settings} ; 
+.
+
+<http://example.org/Sampler/a>
+    a prov:Entity, sosa:Sampler ; #or sosa:Sensor     
+    dct:type {the type of sampler} ;
+    dct:title {name of the sampler} ; 
+    schema:description {the description/listing of the configuration settings} ; 
+    prov:wasInfluencedBy <http://example.org/software/1> ;
+    
+    #Case when instrument is hosted on a platform:
+    sosa:isHostedBy <http://example.org/Platform/A> ;
+. 
+
+
+#PLATFORM#
+<http://example.org/Platform/A> 
+    a prov:Entity, sosa:Platform ; 
+    schema:identifier {ID of the platform} ;
+    dct:type {name of the platform} ; 
+.
+
+#SAMPLE#
+<http://example.org/sample1> 
+    a prov:Entity, sosa:Sample;
+
+    schema:identifier {ID of the sample} ; 
+    schema:name {name of the sample} ; 
+    schema:keywords {e.g. ENVOterms applicable to this sample} ; 
+    schema:size {size of the sample} ; 
+
+    prov:wasAssociatedWith {agent with which this sample is associated} ; 
+
+    #note: other properties can be added if relevant in the given context!
+.
+
+#SOFTWARE#
+<http://example.org/software/1>
+    a prov:Entity, schema:SoftwareApplication ; #or schema:SoftwareSourceCode 
+    
+    schema:name {name of the software} ; 
+    schema:description {description of the software} ; 
+    schema:version {version of the software} ; 
+    schema:featureList {feature provided by the software} ; 
+
+    #note schema:softwareApplication has some other properties that might be interesting. 
+.
+
+#PERMIT#
+<http://example.org/Permit/1>
+    a prov:Entity ; 
+
+    schema:identifier {ID of the permit; can be the IRCC or proof of due dilligence} ; 
+    schema:name {name of the permit} ;
+    schema:description {description of the permit} ; 
+
+    prov:generatedAtTime {datetime when permit was created and valid} ;
+    prov:invalidatedAtTime {datetime when permit became invalid} ;  
+.
+
+<http://example.org/Permit/ABS>
+    a prov:Entity ; 
+
+    schema:identifier {ID of the permit; can be the IRCC or proof of due dilligence} ; 
+    schema:name {name of the permit} ;
+    schema:description {description of the permit} ; 
+
+    prov:generatedAtTime {datetime when permit was created and valid} ;
+    prov:invalidatedAtTime {datetime when permit became invalid} ;  
+
+    schema:spatial [...] ; 
+    schema:temporal [...] ; 
+
+    prov:wasAssociatedWith [
+        a schema:Person ; 
+        schema:identifier {orcID} ; 
+        schema:giveName {firstname} ;
+        schema:surName {surname} ; 
+        schema:email {mail} ; 
+        schema:knowsAbout {domains of expertise} ; 
+        prov:hadRole [
+            a prov:Role ; 
+            dct:type "contact point" ;
+        ] ; 
+    ] ; 
+
+    prov:wasAssociatedWith [
+        a schema:Organization ; 
+        schema:identifier {orcID} ; 
+        schema:name {institute name} ;
+        schema:email {mail} ; 
+        schema:knowsAbout {domains of expertise} ; 
+        prov:hadRole [
+            a prov:Role ; 
+            dct:type "Authorizing agent" ;
+        ] ; 
+    ] ; 
+.
