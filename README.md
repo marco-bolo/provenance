@@ -5,4 +5,4 @@ I have taken the dataset description (json) from [oceaninfohub](https://book.oce
 
 A technical description of our [EMBRC provenance ttl file](https://github.com/marco-bolo/provenance-sandbox/blob/main/embrc_prov_example.ttl) can be found in this repo [here](https://github.com/marco-bolo/provenance-sandbox/blob/main/EMBRC%20reference%20implementation%20for%20provenance_%20technical%20documentation.pdf) (version 0.1 -> i.e. not yet finalised)
 
-I am creating a CSV file to gather the necessary metadata from data providers, with the aim that it allows for easy interaction and can be used no matter which final json file template we decide on. That is on https://docs.google.com/spreadsheets/d/1tYAf9BJh_lDk4aI3-OX43FSKoPFbE-6882Nnj0peU7E/edit?usp=sharing. 
+I am creating a CSV file to gather the necessary metadata from data providers, with the aim that it allows for easy interaction and can be used no matter which final json file template we decide on. That is on https://docs.google.com/spreadsheets/d/1tYAf9BJh_lDk4aI3-OX43FSKoPFbE-6882Nnj0peU7E/edit?usp=sharing. Is also a work-in-progress 
