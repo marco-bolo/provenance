@@ -14,7 +14,7 @@
             "@id": "https://pointing_t0_this_file",
             "@type": "Dataset",
         
-        // description, acknowedgements
+        // description, acknowledgements
             
             "name": "A concise but descriptive name of the dataset",
             "description": "An extended, free-text description of what's in the dataset, who created it, and other attributes",
@@ -41,6 +41,7 @@
             "provider": [ // also can use: creator, publisher, wasAssociatedWith (PROV-O; with prov-o and dcat can also specify the role - Laurian knows how to do that)
                 {
                     "@type": "Organization",
+                    "@id": "id of the provider",
                     "legalName": "Legal Name of Organisation which generated the dataset",
                     "name": "Other Name of Organisation which generated the dataset",
                     "url": "https://organisationWebsite.org/"
@@ -63,6 +64,7 @@
             "distribution": [ // alternative to downloadURL
                 {
                     "@type": "DataDownload", // but there is no type <metadata record>, annoyingly
+                    "@id": "https://www.ebi.ac.uk/ena/browser/view/PRJNA656268",
                     "contentUrl": "https://www.ebi.ac.uk/ena/browser/view/PRJNA656268", // change this for different download URLs
                     "encodingFormat": "https://maq.sourceforge.net/fastq.shtml" // clearly, change this for different formats 
                 }
@@ -84,6 +86,7 @@
             },
             "spatialCoverage": { // we will need different examples for this: a single place, a polygon, a start/endlat/long, a marineregion, will want want one over the other or just what each datasets wants to use?
                 "@type": "Place",
+                "@id": "some MRGID",
                 "geo": {
                     "@type": "GeoShape", // can use GeoCoordinates for lat long
                     "polygon": "142.014 10.161667,142.014 18.033833,147.997833 18.033833,147.997833 10.161667,142.014 10.161667"
@@ -95,8 +98,9 @@
                 } // see <hasGeometry> from PP's example for another way to do this
             },
             "about" : {
-                "@id": " URL to the name of the EOV, if this is a direct EOV dataset?" // am a bit unclear what <about> is for 
-            }, // alternative, which is probably better to use as it is specifically the variables 
+                "@id": "URL to the name of the EOV, if this is a direct EOV dataset?" // am a bit unclear what <about> is for 
+            },
+            // alternative, which is probably better to use as it is specifically the variables 
             "variableMeasured": {
                 "@type": "PropertyValue",
                 "@id": "http://purl.obolibrary.org/obo/PCO_1000004",
@@ -120,15 +124,15 @@
             "@id": "https://example.com/SamplingActivity_nr1", 
             "@type": "sosa:Sampling", 
             "prov:used": [
-                "http://example.org/device/Sampler_nr1", // instrument used, see below for its description 
-                "http://example.org/Permit_nr1", // sampling permits, see below for its description 
-                "http://example.org/Samplingprotocol_nr1>" // protocols, see below for its description 
+                { "@id": "http://example.org/device/Sampler_nr1" }, // instrument used, see below for its description 
+                { "@id": "http://example.org/Permit_nr1" }, // sampling permits, see below for its description 
+                { "@id": "http://example.org/Samplingprotocol_nr1>" } // protocols, see below for its description 
             ],
-            "prov:generated": "http://example.org/Sample_nr1", // this is the material id extracted from the larger samples, see below for the description of <Sample1>
-            "prov:atLocation": "http://example.org/Location_nr1", // could also use the location text we have above 
+            "prov:generated": { "@id": "http://example.org/Sample_nr1" }, // this is the material id extracted from the larger samples, see below for the description of <Sample1>
+            "prov:atLocation": { "@id": "http://example.org/Location_nr1" }, // could also use the location text we have above 
             "prov:startedAtTime": "datetime",
             "prov:endedAtTime": "datetime",
-            "prov:wasAssociatedWith": "http://example.org/Person_nr1" // see below for its description 
+            "prov:wasAssociatedWith": { "@id": "http://example.org/Person_nr1" } // see below for its description 
         },
 
         // wet processing 
@@ -137,16 +141,16 @@
             "@id":"https://example.com/ProcessingActivity_nr1",
             "dct:type": "Processing",
             "schema:instrument": "material & chemical objects that helped the agent perform the action, devices of any sort",
-            "schema:object": "ID of the thing on which the processing activity is performed", 
-            "schema:result": "ID of the result output of this activity",
+            "schema:object": { "@id": "ID of the thing on which the processing activity is performed" }, 
+            "schema:result": { "@id": "ID of the result output of this activity" },
             "prov:used": [
-                "http://example.org/Device_nr1",
-                "http://example.org/Protocol_nr2"
+                { "@id": "http://example.org/Device_nr1" },
+                { "@id": "http://example.org/Protocol_nr2" }
             ],
-            "prov:atLocation": "http://example.org/Location_nr2",
+            "prov:atLocation": { "@id": "http://example.org/Location_nr2" },
             "prov:startedAtTime": "datetime",
             "prov:endedAtTime": "datetime",
-            "prov:wasAssociatedWith":"http://example.org/Person_nr1"
+            "prov:wasAssociatedWith": { "@id": "http://example.org/Person_nr1" }
         },
 
         // storing (short or long-term)
@@ -156,17 +160,17 @@
             "dct:type": "Storing", 
             "schema:additionalType": "the type of storage",
             "schema:description": "description of the storage conditions", 
-            "schema:object": "ID of the thing that is used (~ stored) in this activity",
+            "schema:object": { "@id": "ID of the thing that is used (~ stored) in this activity" },
             "prov:used": [
-                "http://example.org/StorageDevice_nr1",
-                "http://example.org/Protocol_nr3"
+                { "@id": "http://example.org/StorageDevice_nr1" },
+                { "@id": "http://example.org/Protocol_nr3" }
             ],
             // Case of Bio-banking --> Agent associated with this activity is the bio-banking facility
             "schema:identifier": "http://example.org/BiobankInstitute", 
-            "prov:atLocation": "http://example.org/location_nr3", 
+            "prov:atLocation": { "@id": "http://example.org/location_nr3" }, 
             "prov:startedAtTime": "datetime",
             "prov:endedAtTime": "datetime",
-            "prov:wasAssociatedWith": "http://example.org/Person_nr2"
+            "prov:wasAssociatedWith": { "@id": "http://example.org/Person_nr2" }
         }
 
         // permit ....Got TIRED at this point.....
