@@ -119,9 +119,11 @@
         {
             "@id": "https://example.com/SamplingActivity_nr1", 
             "@type": "sosa:Sampling", 
-            "prov:used": "http://example.org/device/Sampler_nr1", // instrument used, see below for its description 
-            "prov:used": "http://example.org/Permit_nr1", // sampling permits, see below for its description 
-            "prov:used": "http://example.org/Samplingprotocol_nr1>", // protocols, see below for its description 
+            "prov:used": [
+                "http://example.org/device/Sampler_nr1", // instrument used, see below for its description 
+                "http://example.org/Permit_nr1", // sampling permits, see below for its description 
+                "http://example.org/Samplingprotocol_nr1>", // protocols, see below for its description 
+            ],
             "prov:generated": "http://example.org/Sample_nr1", // this is the material id extracted from the larger samples, see below for the description of <Sample1>
             "prov:atLocation": "http://example.org/Location_nr1", // could also use the location text we have above 
             "prov:startedAtTime": "datetime",
@@ -137,12 +139,14 @@
             "schema:instrument": "material & chemical objects that helped the agent perform the action, devices of any sort",
             "schema:object": "ID of the thing on which the processing activity is performed", 
             "schema:result": "ID of the result output of this activity",
-            "prov:used": "http://example.org/Device_nr1",
+            "prov:used": [
+                "http://example.org/Device_nr1",
+                "http://example.org/Protocol_nr2"
+            ],
             "prov:atLocation": "http://example.org/Location_nr2",
             "prov:startedAtTime": "datetime",
             "prov:endedAtTime": "datetime",
             "prov:wasAssociatedWith":"http://example.org/Person_nr1",
-            "prov:used": "http://example.org/Protocol_nr2"
         },
 
         // storing (short or long-term)
@@ -153,14 +157,16 @@
             "schema:additionalType": "the type of storage",
             "schema:description": "description of the storage conditions", 
             "schema:object": "ID of the thing that is used (~ stored) in this activity",
-            "prov:used": "http://example.org/StorageDevice_nr1",
+            "prov:used": [
+                "http://example.org/StorageDevice_nr1",
+                "http://example.org/Protocol_nr3"
+            ],
             // Case of Bio-banking --> Agent associated with this activity is the bio-banking facility
             "schema:identifier": "http://example.org/BiobankInstitute", 
             "prov:atLocation": "http://example.org/location_nr3", 
             "prov:startedAtTime": "datetime",
             "prov:endedAtTime": "datetime",
             "prov:wasAssociatedWith": "http://example.org/Person_nr2",
-            "prov:used": "http://example.org/Protocol_nr3"
         }
 
         // permit ....Got TIRED at this point.....
