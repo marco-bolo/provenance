@@ -97,9 +97,10 @@
                     "value": "http://www.w3.org/2003/01/geo/wgs84_pos#lat_long"
                 } // see <hasGeometry> from PP's example for another way to do this
             },
-            "about" : {
-                "@id": "URL to the name of the EOV, if this is a direct EOV dataset?" // am a bit unclear what <about> is for 
-            },
+            "about" : [
+                { "@id": "URL to the name of the EOV, if this is a direct EOV dataset?" }, // am a bit unclear what <about> is for 
+                { "@id": "http://example.org/Sample_nr1" }
+            ],
             // alternative, which is probably better to use as it is specifically the variables 
             "variableMeasured": {
                 "@type": "PropertyValue",
